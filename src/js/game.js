@@ -3,6 +3,7 @@
 
   function Game() {
     this.player = null;
+    this.background = null;
   }
 
   Game.prototype = {
@@ -10,6 +11,8 @@
     create: function () {
       var x = this.game.width / 2
         , y = this.game.height / 2;
+
+        this.background = this.add.sprite(0, 0, 'background');
 
       this.player = this.add.sprite(x, y, 'player');
       this.player.anchor.setTo(0.5, 0.5);

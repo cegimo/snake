@@ -16,6 +16,8 @@
       this.load.setPreloadSprite(this.asset);
       this.load.image('player', 'assets/player.png');
       this.load.image('background', 'assets/background.png');
+      this.load.image('snake_head', 'assets/snake_head.png');
+      this.load.image('snake_body', 'assets/snake_body.png');
       this.load.bitmapFont('minecraftia', 'assets/minecraftia.png', 'assets/minecraftia.xml');
     },
 

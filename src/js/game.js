@@ -9,6 +9,10 @@
     this.floor = null;
     this.snakeHead = new Array(10,10);//posiciones x, y de la cabeza
     this.snakeTail = new Array(8,10);//posiciones x, y de la cola
+    this.upKey = null;
+    this.downKey = null;
+    this.leftKey = null;
+    this.rightKey = null;
   }
 
   Game.prototype = {
@@ -24,12 +28,36 @@
       this.createFloor();
       this.initSnake();
 
+      //keys asignement 
+    this.upKey = this.input.keyboard.addKey(Phaser.Keyboard.UP);
+    this.downKey = this.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    this.leftKey = this.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+    this.rightKey = this.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    this.spaceBar = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
 
     },
 
     update: function () {
+      
+        if (this.upKey.isDown)
+      {
 
+          
+          }
+         
+      if (this.downKey.isDown)
+      {
+       
+      }
+      if (this.leftKey.isDown)
+      {
+       
+      }
+      if (this.rightKey.isDown)
+      {
 
+      }
      
     },
 

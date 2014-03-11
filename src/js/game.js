@@ -55,13 +55,12 @@
     {
         for (var i = 8; i <= 10; i++ )
         {
-          this.floor[i][10]=1;
-          this.add.sprite( ((20*i) + 10), (10*10), 'snake_body');
+          this.floor[i][10] = this.add.sprite( ((20*i) + 10), (20*10), 'snake_body');
           //console.log("hola");
 
         }
 
-        this.add.sprite( ((20*10) + 10), (10*10), 'snake_head');
+        this.add.sprite( ((20*10) + 10), (20*10), 'snake_head');
 
     },
 

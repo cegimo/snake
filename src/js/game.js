@@ -2,8 +2,13 @@
   'use strict';
 
   function Game() {
-    this.player = null;
+    this.celda = null;
     this.background = null;
+    this.numberRows = 29;
+    this.numberColumn = 39;
+    this.floor = null;
+    this.snakeHead = new Array(10,10);//posiciones x, y de la cabeza
+    this.snakeTail = new Array(8,10);//posiciones x, y de la cola
   }
 
   Game.prototype = {
@@ -14,33 +19,51 @@
 
         this.background = this.add.sprite(0, 0, 'background');
 
-      this.player = this.add.sprite(x, y, 'player');
-      this.player.anchor.setTo(0.5, 0.5);
-      this.input.onDown.add(this.onInputDown, this);
+
+      //creamos el suelo
+      this.createFloor();
+      this.initSnake();
+
+
     },
 
     update: function () {
-      var x, y, cx, cy, dx, dy, angle, scale;
 
-      x = this.input.position.x;
-      y = this.input.position.y;
-      cx = this.world.centerX;
-      cy = this.world.centerY;
 
-      angle = Math.atan2(y - cy, x - cx) * (180 / Math.PI);
-      this.player.angle = angle;
-
-      dx = x - cx;
-      dy = y - cy;
-      scale = Math.sqrt(dx * dx + dy * dy) / 100;
-
-      this.player.scale.x = scale * 0.6;
-      this.player.scale.y = scale * 0.6;
+     
     },
 
     onInputDown: function () {
-      this.game.state.start('menu');
-    }
+      //this.game.state.start('menu');
+    },
+    createFloor: function ()
+    {
+      this.floor = new Array(this.numberRows);
+      for (var i = 0; i < this.numberRows; i++) 
+      {
+        this.floor[i] = new Array(this.numberColumn);
+      }
+      for (var i = 0; i < this.numberRows; i++)
+      {
+        for (var j = 0; j < this.numberColumn; j++)
+        {
+          this.floor[i][j] = -1;
+        }
+      }
+    },
+    initSnake: function ()
+    {
+        for (var i = 8; i <= 10; i++ )
+        {
+          this.floor[i][10]=1;
+          this.add.sprite( ((20*i) + 10), (10*10), 'snake_body');
+          //console.log("hola");
+
+        }
+
+        this.add.sprite( ((20*10) + 10), (10*10), 'snake_head');
+
+    },
 
   };
 

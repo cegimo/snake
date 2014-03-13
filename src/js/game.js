@@ -3,6 +3,8 @@
 
   function Game() {
     this.celda = null;
+    this.score = null;
+    this.scoreText = null;
     this.background = null;
     this.numberRows = 29;
     this.numberColumn = 39;
@@ -26,6 +28,8 @@
 
 
       this.food = this.add.sprite( 10 + (Math.floor((Math.random()*780)+1)), 10 + (Math.floor((Math.random()*600)+1)), 'egg_green');
+
+      this.scoreText = this.add.text(20, 20, 'SCORE: 0', { font: "20px Arial", fill: "#16DE16", align: "left" });
 
       this.initSnake();
       //console.log(firstNode.x);
@@ -57,6 +61,9 @@
       {
 
       }
+
+
+      this.physics.overlap(this.snake_head, this.food, function (snake_head, food) {  food.kill(); this.score += 10; this.scoreText.content = 'SCORE: ' + this.score;}, null, this);
      
     },
 

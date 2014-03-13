@@ -13,11 +13,9 @@
     this.downKey = null;
     this.leftKey = null;
     this.rightKey = null;
-<<<<<<< HEAD
     this.direction = 1;
-=======
     this.food = null;
->>>>>>> 35734e28f1106c92fa35519ecb89eef476557652
+    this.time = null;
   }
 
   Game.prototype = {
@@ -25,6 +23,7 @@
     create: function () {
       var x = this.game.width / 2
         , y = this.game.height / 2;
+         this.time = this.game.time.now;
       
       this.background = this.add.sprite(0, 0, 'background');
 
@@ -43,41 +42,50 @@
     },
 
     update: function () {
+
+      if(this.time +100 < this.game.time.now)
+      {
+        if(this.direction === 0)
+        {
+          this.newSnakeNode(this.snake[(this.snake.length)-1], 0, -1);
+          this.deleteNode();
+        }
+        if(this.direction === 1)
+        {
+          this.newSnakeNode(this.snake[(this.snake.length)-1], 1, 0);
+          this.deleteNode();
+        }
+        if(this.direction === 2)
+        {
+          this.newSnakeNode(this.snake[(this.snake.length)-1], 0, 1);
+          this.deleteNode();
+        }
+        if(this.direction === 3)
+        {
+          this.newSnakeNode(this.snake[(this.snake.length)-1], -1, 0);
+          this.deleteNode();
+        }
+        this.time = this.game.time.now;
+        
+      }
+
       
         if (this.upKey.isDown)
       {
-          if(this.direction != 0 && this.direction != 2)
-          {
-            this.newSnakeNode(this.snake[(this.snake.length)-1], 0, -1);
             this.direction = 0;
-          }
-          //console.log(this.snake.lenght-1);
       }
          
       if (this.downKey.isDown)
       {
-        if(this.direction != 0 && this.direction != 2)
-          {
-              this.newSnakeNode(this.snake[(this.snake.length)-1], 0, 1);
               this.direction = 2;
-          }
-
       }
       if (this.leftKey.isDown)
       {
-        if(this.direction != 3 && this.direction != 1)
-          {
-           this.newSnakeNode(this.snake[(this.snake.length)-1], -1, 0);
            this.direction = 3;
-         }
       }
       if (this.rightKey.isDown)
       {
-          if(this.direction != 3 && this.direction != 1)
-          {
-            this.newSnakeNode(this.snake[(this.snake.length)-1], 1, 0);
             this.direction = 1;
-          }
       }
      
     },
@@ -101,9 +109,8 @@
     },
     newSnakeNode: function (last, x, y)
     {
-       //last.sprite.destroy();
+       last.sprite.destroy();
        last.sprite = this.add.sprite( (((last.x )* 20) + 10), (((last.y )* 20) + 10), 'snake_body');
-       console.log(last.x);
        this.size = this.snake.push(new this.SnakeNode( last.x + x, last.y + y , null ,  this.add.sprite( (((last.x + x )* 20) + 10), (((last.y + y)* 20) + 10), 'snake_head')));
 
     },
@@ -114,6 +121,11 @@
       this.previous = previous;
       this.sprite = sprite; 
     },
+    deleteNode: function ()
+    {
+      this.snake[0].sprite.destroy();
+      this.snake.shift();
+    }
 
   };
 

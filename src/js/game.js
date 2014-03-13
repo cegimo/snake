@@ -10,12 +10,16 @@
     this.numberColumn = 39;
     this.floor = null;
     this.snakeSprite = null;
-    this.snake = new Array(1);
+    this.snake = [];
     this.upKey = null;
     this.downKey = null;
     this.leftKey = null;
     this.rightKey = null;
+<<<<<<< HEAD
+    this.direction = 1;
+=======
     this.food = null;
+>>>>>>> 35734e28f1106c92fa35519ecb89eef476557652
   }
 
   Game.prototype = {
@@ -46,20 +50,38 @@
       
         if (this.upKey.isDown)
       {
-          this.newSnakeNode(this.snake.lenght-1, 0, 1);
+          if(this.direction != 0 && this.direction != 2)
+          {
+            this.newSnakeNode(this.snake[(this.snake.length)-1], 0, -1);
+            this.direction = 0;
+          }
+          //console.log(this.snake.lenght-1);
       }
          
       if (this.downKey.isDown)
       {
-       
+        if(this.direction != 0 && this.direction != 2)
+          {
+              this.newSnakeNode(this.snake[(this.snake.length)-1], 0, 1);
+              this.direction = 2;
+          }
+
       }
       if (this.leftKey.isDown)
       {
-       
+        if(this.direction != 3 && this.direction != 1)
+          {
+           this.newSnakeNode(this.snake[(this.snake.length)-1], -1, 0);
+           this.direction = 3;
+         }
       }
       if (this.rightKey.isDown)
       {
-
+          if(this.direction != 3 && this.direction != 1)
+          {
+            this.newSnakeNode(this.snake[(this.snake.length)-1], 1, 0);
+            this.direction = 1;
+          }
       }
 
 
@@ -81,23 +103,22 @@
     },*/
     initSnake: function ()
     {
-       this.snake [0] = new this.SnakeNode( 9, 9, null, null, this.add.sprite( ((20 * 9) + 10), ((20 * 9) + 10), 'snake_head'));
+       this.size = this.snake.push(new this.SnakeNode( 9, 9, null, this.add.sprite( ((20 * 9) + 10), ((20 * 9) + 10), 'snake_head')));
        this.newSnakeNode(this.snake[0], 1, 0);
     },
     newSnakeNode: function (last, x, y)
     {
        //last.sprite.destroy();
        last.sprite = this.add.sprite( (((last.x )* 20) + 10), (((last.y )* 20) + 10), 'snake_body');
-       last.xPrevious += x;
-       last.yPrevious += y;
-       this.snake.push(new this.SnakeNode( last.x + x, last.y + y , null , null , this.add.sprite( (((last.x + x )* 20) + 10), (((last.y + y)* 20) + 10), 'snake_head')));
+       console.log(last.x);
+       this.size = this.snake.push(new this.SnakeNode( last.x + x, last.y + y , null ,  this.add.sprite( (((last.x + x )* 20) + 10), (((last.y + y)* 20) + 10), 'snake_head')));
+
     },
-    SnakeNode: function (x, y, xPrevious, yPrevious, sprite) 
+    SnakeNode: function (x, y, previous, sprite) 
     { 
       this.x = x; 
       this.y = y;
-      this.xPrevious = xPrevious;
-      this.yPrevious = yPrevious;
+      this.previous = previous;
       this.sprite = sprite; 
     },
 

@@ -13,6 +13,7 @@
     this.downKey = null;
     this.leftKey = null;
     this.rightKey = null;
+    this.food = null;
   }
 
   Game.prototype = {
@@ -22,6 +23,9 @@
         , y = this.game.height / 2;
       
       this.background = this.add.sprite(0, 0, 'background');
+
+
+      this.food = this.add.sprite( 10 + (Math.floor((Math.random()*780)+1)), 10 + (Math.floor((Math.random()*600)+1)), 'egg_green');
 
       this.initSnake();
       //console.log(firstNode.x);

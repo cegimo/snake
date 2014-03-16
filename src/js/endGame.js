@@ -1,25 +1,19 @@
 (function() {
   'use strict';
 
-  function Menu() {
+  function EndGame() {
     this.titleTxt = null;
     this.startTxt = null;
-    this.scoreTxt = null;
   }
 
-  Menu.prototype = {
+  EndGame.prototype = {
     create: function () {
       var x = this.game.width / 2
-        , y = this.game.height / 3;
+        , y = this.game.height / 2;
 
 
-      this.titleTxt = this.add.bitmapText(x, y, 'SNAKE', {font: '36px minecraftia', align: 'center'});
+      this.titleTxt = this.add.bitmapText(x, y, 'Fin', {font: '36px minecraftia', align: 'center'});
       this.titleTxt.anchor.setTo(0.5, 0.5);
-
-      y = y + this.titleTxt.height + 5;
-      this.startTxt = this.add.bitmapText(x, y, 'MAX SCORE: ' + window['snake'].myGlobal.maxScore, {font: '12px minecraftia', align: 'center'});
-      this.startTxt.anchor.setTo(0.5, 0.5);
-      
 
       y = y + this.titleTxt.height + 5;
       this.startTxt = this.add.bitmapText(x, y, 'START', {font: '12px minecraftia', align: 'center'});
@@ -33,11 +27,11 @@
     },
 
     onDown: function () {
-      this.game.state.start('game');
+      this.game.state.start('endGame');
     }
   };
 
   window['snake'] = window['snake'] || {};
-  window['snake'].Menu = Menu;
+  window['snake'].EndGame = EndGame;
 
 }());

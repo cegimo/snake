@@ -12,7 +12,7 @@
     create: function () {
       this.game.input.maxPointers = 1;
       // this.game.stage.disableVisibilityChange = true;
-
+       window['snake'].myGlobal = { maxScore : 0  };
       if (this.game.device.desktop) {
         this.game.stage.scale.pageAlignHorizontally = true;
       } else {
@@ -31,6 +31,6 @@
 
   window['snake'] = window['snake'] || {};
   window['snake'].Boot = Boot;
-
+  window['snake'].myGlobal= {};
 }());
 
